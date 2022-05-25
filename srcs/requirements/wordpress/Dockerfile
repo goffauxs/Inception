@@ -8,4 +8,4 @@ COPY tools/www.conf /etc/php/7.3/fpm/pool.d
 
 RUN mkdir -p /run/php
 
-CMD /usr/sbin/php-fpm7.3
+CMD /usr/sbin/php-fpm7.3 --nodaemonize
