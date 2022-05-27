@@ -2,10 +2,17 @@ FROM debian:buster
 
 RUN	apt-get update -y && \
 	apt-get upgrade -y && \
-	apt-get install -y mariadb-server
+	apt-get install -y mariadb-server gettext-base
+
+WORKDIR /tmp/mariadb/
 
 COPY tools/my.cnf /etc/mysql
 
-RUN echo "ALTER USER 'root'@'localhost' IDENTIFIED VIA mysql_native_password USING PASSWORD('${ROOT_PW}');" > /var/lib/mysql/pass-reset
+COPY tools/setup.sql /tmp/mariadb/
 
-CMD mysqld_safe --init-file=/var/lib/mysql/pass-reset
+COPY tools/script.sh /tmp/mariadb/
+
+EXPOSE 3306
+
+CMD sh /tmp/mariadb/script.sh
+

@@ -24,6 +24,8 @@ services:
         networks:
             - mynetwork
         restart: always
+        env_file:
+          - .env
         volumes:
             - "php_nginx:/var/www/html"
         container_name: wordpress
