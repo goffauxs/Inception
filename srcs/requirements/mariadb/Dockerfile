@@ -14,5 +14,5 @@ COPY tools/script.sh /tmp/mariadb/
 
 EXPOSE 3306
 
-CMD sh /tmp/mariadb/script.sh
+CMD ["sh", "/tmp/mariadb/script.sh"]
 
