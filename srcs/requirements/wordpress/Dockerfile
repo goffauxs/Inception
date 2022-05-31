@@ -18,4 +18,4 @@ WORKDIR /var/www/html/wordpress
 RUN wp core download --allow-root
 RUN chown -R www-data:www-data /var/www/html
 
-CMD sh /tmp/wordpress/script.sh
+CMD ["sh", "/tmp/wordpress/script.sh"]

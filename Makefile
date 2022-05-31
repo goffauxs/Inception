@@ -1,8 +1,4 @@
-ifndef $(SUDO_USER)
-HOME_DIR = $(HOME)
-else
 HOME_DIR != getent passwd $(SUDO_USER) | cut -d: -f6;
-endif
 
 all:
 	mkdir -p ${HOME_DIR}/data/php_nginx

@@ -20,7 +20,8 @@ services:
         build:
             context: ./requirements/wordpress
         depends_on:
-            - mariadb
+            mariadb:
+                condition: service_healthy
         networks:
             - mynetwork
         restart: always
@@ -41,6 +42,10 @@ services:
         env_file:
             - .env
         container_name: mariadb
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "$$MYSQL_USER", "-p$$MYSQL_PASSWORD"]
+            timeout: 1s
+            retries: 50
 
 networks:
     mynetwork:
@@ -51,10 +56,10 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /home/sgoffaux/data/php_nginx
+            device: /home/goffauxs/data/php_nginx
     db:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/sgoffaux/data/db
+            device: /home/goffauxs/data/db
