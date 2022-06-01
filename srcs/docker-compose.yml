@@ -57,6 +57,31 @@ services:
         restart: always
         container_name: redis
 
+    adminer:
+        build:
+            context: ./requirements/bonus/adminer
+        depends_on:
+            - wordpress
+        networks:
+            - mynetwork
+        container_name: adminer
+        volumes:
+            - "php_nginx:/var/www/html"
+    ftp:
+        build:
+            context: ./requirements/bonus/ftp
+        depends_on:
+            - wordpress
+        networks:
+            - mynetwork
+        restart: always
+        container_name: ftp
+        volumes:
+            - "php_nginx:/ftp"
+        ports:
+            - "21:21"
+            - "20:20"
+
 networks:
     mynetwork:
 
@@ -66,10 +91,10 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /home/goffauxs/data/php_nginx
+            device: /home/sgoffaux/data/php_nginx
     db:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/goffauxs/data/db
+            device: /home/sgoffaux/data/db

@@ -7,7 +7,7 @@ wp config set WP_CACHE_KEY_SALT sgoffaux.42.fr --allow-root;
 wp config set WP_REDIS_HOST redis --allow-root;
 wp config set WP_REDIS_PORT 6379 --raw --allow-root;
 if ! wp core is-installed --allow-root; then
-	wp core install --url="sgoffaux.42.fr" --title="sgoffaux's wordpress site" --admin_user="sgoffaux" --admin_password="42" --admin_email="sgoffaux@student.s19.be" --path="/var/www/html/wordpress/" --allow-root
+	wp core install --url="sgoffaux.42.fr" --title="sgoffaux's wordpress site" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PASSWORD" --admin_email="sgoffaux@student.s19.be" --path="/var/www/html/wordpress/" --allow-root
 fi
 if ! wp user get lorem --allow-root; then
 	wp user create lorem lorem@ipsum.fr --role=author --user_pass="123" --allow-root
