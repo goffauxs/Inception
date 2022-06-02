@@ -72,6 +72,8 @@ services:
             context: ./requirements/bonus/ftp
         depends_on:
             - wordpress
+        env_file:
+            - .env
         networks:
             - mynetwork
         restart: always
@@ -79,9 +81,9 @@ services:
         volumes:
             - "php_nginx:/ftp"
         ports:
-            - "21:21"
-            - "20:20"
-
+            - "0.0.0.0:20:20"
+            - "0.0.0.0:21:21"
+            - "21100-21110:21100-21110"
 networks:
     mynetwork:
 
@@ -91,10 +93,10 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: /home/sgoffaux/data/php_nginx
+            device: /home/${SUDO_USER}/data/php_nginx
     db:
         driver: local
         driver_opts:
             type: none
             o: bind
-            device: /home/sgoffaux/data/db
+            device: /home/${SUDO_USER}/data/db

@@ -5,7 +5,6 @@ RUN	apt-get update -y && \
 	apt-get install -y vsftpd ftp
 
 COPY tools/script.sh /tmp/ftp/
+COPY tools/vsftpd.conf /etc/
 
-RUN sh /tmp/ftp/script.sh
-
-CMD vsftpd
+CMD ["sh", "/tmp/ftp/script.sh"]
