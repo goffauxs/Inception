@@ -49,7 +49,7 @@ services:
 
     redis:
         build:
-            context: ./requirements/bonus/redis
+            context: ./bonus/redis
         ports:
             - "6379:6379"
         networks:
@@ -59,7 +59,7 @@ services:
 
     adminer:
         build:
-            context: ./requirements/bonus/adminer
+            context: ./bonus/adminer
         depends_on:
             - wordpress
         networks:
@@ -69,7 +69,7 @@ services:
             - "php_nginx:/var/www/html"
     ftp:
         build:
-            context: ./requirements/bonus/ftp
+            context: ./bonus/ftp
         depends_on:
             - wordpress
         env_file:
@@ -84,6 +84,40 @@ services:
             - "0.0.0.0:20:20"
             - "0.0.0.0:21:21"
             - "21100-21110:21100-21110"
+    express:
+        build:
+            context: ./bonus/express
+        networks:
+            - mynetwork
+        restart: always
+        container_name: express
+        ports:
+            - "80:80"
+    # grafana:
+    #     build:
+    #         context: ./bonus/grafana
+    #     networks:
+    #         - mynetwork
+    #     restart: always
+    #     container_name: grafana
+    #     ports:
+    #         - "3000:3000"
+    cadvisor:
+        build:
+            context: ./bonus/cadvisor
+        networks:
+            - mynetwork
+        restart: always
+        container_name: cadvisor
+        volumes:
+            - /:/rootfs:ro
+            - /var/run:/var/run:ro
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+            - /dev/disk/:/dev/disk:ro
+        ports:
+            - "7000:7000"
+
 networks:
     mynetwork:
 
