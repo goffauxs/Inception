@@ -14,6 +14,6 @@ RUN npm install
 
 COPY tools/app/* ./
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["node", "index.js"]
