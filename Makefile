@@ -4,7 +4,7 @@ all:
 	mkdir -p ${HOME_DIR}/data/php_nginx
 	mkdir -p ${HOME_DIR}/data/db
 	docker-compose -f srcs/docker-compose.yml build
-	docker-compose -f srcs/docker-compose.yml up
+	docker-compose -f srcs/docker-compose.yml up --detach
 
 stop:
 	docker-compose -f srcs/docker-compose.yml down

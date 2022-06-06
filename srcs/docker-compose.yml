@@ -50,8 +50,8 @@ services:
     redis:
         build:
             context: ./bonus/redis
-        ports:
-            - "6379:6379"
+              #ports:
+              #- "6379:6379"
         networks:
             - mynetwork
         restart: always

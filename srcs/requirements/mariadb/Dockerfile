@@ -10,8 +10,6 @@ COPY tools/my.cnf /etc/mysql
 
 COPY tools/script.sh /tmp/mariadb/
 
-EXPOSE 3306
-
 ENTRYPOINT ["sh", "/tmp/mariadb/script.sh"]
 
 CMD ["mysqld_safe"]
